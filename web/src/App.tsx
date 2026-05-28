@@ -5,7 +5,7 @@ import { TaView } from "./components/TaView";
 import { loadIndex, loadTicker } from "./data";
 import { useHashRoute } from "./hashRoute";
 import type { IndexFile, TickerData } from "./types";
-import { fmtDate } from "./format";
+import { fmtDateTime } from "./format";
 
 export default function App() {
   const [route, setRoute] = useHashRoute();
@@ -69,8 +69,7 @@ export default function App() {
               </h1>
             </div>
             <div className="text-xs text-ink-400 mt-1">
-              Data as of {fmtDate(ticker.asOf)} · cached locally · refresh via{" "}
-              <code className="text-ink-300">make refresh</code>
+              Last refreshed {fmtDateTime(ticker.asOf)}
             </div>
           </div>
         )}

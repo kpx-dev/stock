@@ -201,7 +201,7 @@ def upsert_ticker(conn: sqlite3.Connection, symbol: str, info: dict) -> None:
             info.get("industry"),
             info.get("exchange"),
             info.get("currency"),
-            datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+            datetime.now(timezone.utc).isoformat(timespec="seconds"),
         ),
     )
     conn.commit()
