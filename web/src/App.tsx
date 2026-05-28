@@ -54,7 +54,13 @@ export default function App() {
         onSelectTab={(tab) => setRoute({ tab })}
       />
 
-      <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-6 w-full">
+      <main
+        className={`flex-1 w-full ${
+          route.tab === "ta"
+            ? "max-w-none px-2 sm:px-3 py-4"
+            : "max-w-7xl mx-auto px-4 sm:px-6 py-6"
+        }`}
+      >
         {ticker && (
           <div className="mb-5">
             <div className="flex items-baseline gap-3 flex-wrap">
