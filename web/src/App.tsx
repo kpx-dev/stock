@@ -77,10 +77,8 @@ export default function App() {
           <div className="mb-5">
             <div className="flex items-baseline gap-3 flex-wrap">
               <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
-                <span className="font-mono text-accent-400">{ticker.symbol}</span>{" "}
-                <span className="text-ink-100">{ticker.name}</span>
+                <span className="font-mono text-accent-400">{ticker.symbol}</span>
               </h1>
-              {ticker.exchange && <span className="pill">{ticker.exchange}</span>}
             </div>
             <div className="text-xs text-ink-400 mt-1">
               Data as of {fmtDate(ticker.asOf)} · cached locally · refresh via{" "}

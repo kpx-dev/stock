@@ -97,35 +97,7 @@ export function FaView({ data, theme }: FaViewProps) {
   return (
     <div className="space-y-6">
       <section className="grid grid-cols-1 lg:grid-cols-[1.3fr_2fr] gap-4">
-        <div className="space-y-3">
-          {earningsCard}
-          <div className="card p-4 sm:p-5">
-            <div className="text-xs uppercase tracking-wide text-ink-400 mb-2">Company</div>
-            <div className="text-sm text-ink-200 leading-relaxed">
-              {data.info.longBusinessSummary ? (
-                <ClampText text={data.info.longBusinessSummary} chars={400} />
-              ) : (
-                <span className="text-ink-400">No description available.</span>
-              )}
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2 text-xs">
-              {data.sector && <span className="pill">{data.sector}</span>}
-              {data.industry && <span className="pill">{data.industry}</span>}
-              {data.exchange && <span className="pill">{data.exchange}</span>}
-              {data.info.country && <span className="pill">{data.info.country}</span>}
-              {data.info.website && (
-                <a
-                  href={data.info.website}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="pill hover:text-accent-400"
-                >
-                  {data.info.website.replace(/^https?:\/\//, "")}
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
+        <div className="space-y-3">{earningsCard}</div>
         <div className="card p-4 sm:p-5">
           <div className="text-xs uppercase tracking-wide text-ink-400 mb-3">Key Stats</div>
           <MetricGrid metrics={heroMetrics} columns={4} />
@@ -179,19 +151,3 @@ export function FaView({ data, theme }: FaViewProps) {
   );
 }
 
-function ClampText({ text, chars }: { text: string; chars: number }) {
-  const [open, setOpen] = useState(false);
-  if (text.length <= chars) return <>{text}</>;
-  return (
-    <>
-      {open ? text : text.slice(0, chars).trimEnd() + "…"}{" "}
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="text-accent-400 hover:underline text-xs ml-1"
-      >
-        {open ? "show less" : "show more"}
-      </button>
-    </>
-  );
-}
