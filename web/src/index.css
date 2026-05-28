@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark light;
+  color-scheme: dark;
 }
 
 html, body, #root {
@@ -43,17 +43,16 @@ html, body, #root {
   fill: rgba(74, 222, 128, 0.95) !important;
 }
 
-/* Light theme overrides via .dark / no-class on <html> */
-html:not(.dark) body {
-  background-color: #f5f7fa;
-  color: #181d27;
+/* Plotly hover tooltip: belt-and-suspenders dark styling in case a chart
+   forgets to set hoverlabel.bgcolor. */
+.js-plotly-plot .hoverlayer .hovertext {
+  fill: #e6ebf2 !important;
 }
-html:not(.dark) .card {
-  @apply bg-white border-ink-200 shadow-md shadow-ink-200/40;
+.js-plotly-plot .hoverlayer .hovertext path {
+  fill: #0b1020 !important;
+  stroke: #334155 !important;
 }
-html:not(.dark) .btn {
-  @apply bg-white border-ink-200 hover:bg-ink-50 text-ink-700;
-}
-html:not(.dark) .pill {
-  @apply bg-ink-100 text-ink-700 border-ink-200;
+.js-plotly-plot .hoverlayer .hovertext text,
+.js-plotly-plot .hoverlayer .hovertext .name {
+  fill: #e6ebf2 !important;
 }

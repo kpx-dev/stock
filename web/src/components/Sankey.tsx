@@ -5,7 +5,7 @@ import { fmtMoney } from "../format";
 
 interface SankeyProps {
   period: StatementPeriod;
-  theme: "dark" | "light";
+
   currency?: string;
 }
 
@@ -142,7 +142,7 @@ function buildFlows(items: Record<string, number | null>): {
   return { flows, revenue, netIncome };
 }
 
-export function Sankey({ period, theme, currency = "USD" }: SankeyProps) {
+export function Sankey({ period, currency = "USD" }: SankeyProps) {
   const { data, layout } = useMemo(() => {
     const { flows, revenue } = buildFlows(period.items);
 
@@ -204,7 +204,7 @@ export function Sankey({ period, theme, currency = "USD" }: SankeyProps) {
       node: {
         pad: 18,
         thickness: 18,
-        line: { color: theme === "dark" ? "rgba(0,0,0,0.4)" : "rgba(0,0,0,0.15)", width: 0.5 },
+        line: { color: "rgba(0,0,0,0.4)", width: 0.5 },
         label: labels,
         color: nodeColors,
       },
@@ -223,7 +223,7 @@ export function Sankey({ period, theme, currency = "USD" }: SankeyProps) {
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
       font: {
-        color: theme === "dark" ? "#e6ebf2" : "#181d27",
+        color: "#e6ebf2",
         size: 12,
         family: "Inter, ui-sans-serif, system-ui, sans-serif",
       },
@@ -232,7 +232,7 @@ export function Sankey({ period, theme, currency = "USD" }: SankeyProps) {
     };
 
     return { data: [sankeyTrace], layout };
-  }, [period, theme, currency]);
+  }, [period, currency]);
 
   return <PlotlyChart data={data} layout={layout} className="w-full" />;
 }

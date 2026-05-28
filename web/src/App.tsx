@@ -7,33 +7,17 @@ import { useHashRoute } from "./hashRoute";
 import type { IndexFile, TickerData } from "./types";
 import { fmtDate } from "./format";
 
-function useTheme(): ["dark" | "light", () => void] {
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
-    const stored = (typeof window !== "undefined" && localStorage.getItem("theme")) as
-      | "dark"
-      | "light"
-      | null;
-    if (stored) return stored;
-    return "dark";
-  });
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === "dark") root.classList.add("dark");
-    else root.classList.remove("dark");
-    try {
-      localStorage.setItem("theme", theme);
-    } catch {}
-  }, [theme]);
-  return [theme, () => setTheme(theme === "dark" ? "light" : "dark")];
-}
-
 export default function App() {
   const [route, setRoute] = useHashRoute();
   const [index, setIndex] = useState<IndexFile | null>(null);
   const [ticker, setTicker] = useState<TickerData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [theme, toggleTheme] = useTheme();
+
+  useEffect(() => {
+    document.documentElement.classList.add("dark");
+    document.documentElement.classList.remove("light");
+  }, []);
 
   useEffect(() => {
     loadIndex()
@@ -66,10 +50,8 @@ export default function App() {
         symbol={route.symbol}
         tab={route.tab}
         tickers={index?.tickers || []}
-        theme={theme}
         onSelectSymbol={(sym) => setRoute({ symbol: sym })}
         onSelectTab={(tab) => setRoute({ tab })}
-        onToggleTheme={toggleTheme}
       />
 
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-6 w-full">
@@ -102,9 +84,9 @@ export default function App() {
         {ticker && !error && (
           <>
             {route.tab === "fa" ? (
-              <FaView data={ticker} theme={theme} />
+              <FaView data={ticker} />
             ) : (
-              <TaView data={ticker} theme={theme} />
+              <TaView data={ticker} />
             )}
           </>
         )}

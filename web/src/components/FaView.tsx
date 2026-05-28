@@ -7,10 +7,10 @@ import { fmtMoney, fmtPercent, fmtRatio, fmtDate, fmtPercentRaw } from "../forma
 
 interface FaViewProps {
   data: TickerData;
-  theme: "dark" | "light";
+
 }
 
-export function FaView({ data, theme }: FaViewProps) {
+export function FaView({ data}: FaViewProps) {
   const [granularity, setGranularity] = useState<"annual" | "quarterly">("annual");
   const periods = data.income[granularity];
   const latest = periods[0];
@@ -130,7 +130,7 @@ export function FaView({ data, theme }: FaViewProps) {
           </div>
         </div>
         {latest ? (
-          <Sankey period={latest} theme={theme} currency={currency} />
+          <Sankey period={latest} currency={currency} />
         ) : (
           <p className="text-ink-400 text-sm">No income statement data available.</p>
         )}
@@ -142,7 +142,7 @@ export function FaView({ data, theme }: FaViewProps) {
         </div>
         <h3 className="text-lg font-semibold mb-3">Revenue · Operating Income · Net Income</h3>
         {periods.length > 0 ? (
-          <IncomeTrend periods={periods} theme={theme} granularity={granularity} />
+          <IncomeTrend periods={periods} granularity={granularity} />
         ) : (
           <p className="text-ink-400 text-sm">No data.</p>
         )}

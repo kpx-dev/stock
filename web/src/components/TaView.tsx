@@ -10,10 +10,10 @@ const PERIOD_DAYS: Record<Period, number> = { "1y": 252, "3y": 252 * 3, "5y": 25
 
 interface TaViewProps {
   data: TickerData;
-  theme: "dark" | "light";
+
 }
 
-export function TaView({ data, theme }: TaViewProps) {
+export function TaView({ data}: TaViewProps) {
   const [period, setPeriod] = useState<Period>("1y");
 
   const { price, indicators } = useMemo(() => {
@@ -50,8 +50,8 @@ export function TaView({ data, theme }: TaViewProps) {
   }, [data, period]);
 
   const x = price.map((p) => p.date);
-  const fontColor = theme === "dark" ? "#e6ebf2" : "#181d27";
-  const gridColor = theme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
+  const fontColor = "#e6ebf2";
+  const gridColor = "rgba(255,255,255,0.06)";
   const currency = data.currency || "USD";
 
   // Performance summary for header

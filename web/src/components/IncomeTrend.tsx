@@ -4,11 +4,11 @@ import type { StatementPeriod } from "../types";
 
 interface IncomeTrendProps {
   periods: StatementPeriod[];
-  theme: "dark" | "light";
+
   granularity: "annual" | "quarterly";
 }
 
-export function IncomeTrend({ periods, theme, granularity }: IncomeTrendProps) {
+export function IncomeTrend({ periods, granularity }: IncomeTrendProps) {
   const { data, layout } = useMemo(() => {
     // sort ascending
     const sorted = [...periods].sort((a, b) => a.period.localeCompare(b.period));
@@ -45,8 +45,8 @@ export function IncomeTrend({ periods, theme, granularity }: IncomeTrendProps) {
       },
     ];
 
-    const fontColor = theme === "dark" ? "#e6ebf2" : "#181d27";
-    const gridColor = theme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.08)";
+    const fontColor = "#e6ebf2";
+    const gridColor = "rgba(255,255,255,0.06)";
 
     const layout: Partial<Plotly.Layout> = {
       paper_bgcolor: "rgba(0,0,0,0)",
@@ -61,7 +61,7 @@ export function IncomeTrend({ periods, theme, granularity }: IncomeTrendProps) {
       hovermode: "x unified",
     };
     return { data, layout };
-  }, [periods, theme, granularity]);
+  }, [periods, granularity]);
 
   return <PlotlyChart data={data} layout={layout} className="w-full" />;
 }
