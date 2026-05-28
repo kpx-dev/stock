@@ -145,3 +145,5 @@ data/*.sqlite-journal
 data/*.sqlite-wal
 data/*.sqlite-shm
 AGENT_TASK.md
+web/tsconfig.tsbuildinfo
+web/dist/

@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark light;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+@layer base {
+  body {
+    @apply font-sans;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-ink-700/60 bg-ink-900/70 backdrop-blur-sm shadow-lg shadow-black/20;
+  }
+  .btn {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium border border-ink-700 bg-ink-800/60 hover:bg-ink-700/60 transition-colors;
+  }
+  .btn-active {
+    @apply border-accent-500/60 bg-accent-500/10 text-accent-400;
+  }
+  .pill {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-ink-800/70 text-ink-300 border border-ink-700/70;
+  }
+}
+
+/* Plotly modebar tweaks for dark theme */
+.js-plotly-plot .modebar {
+  background: transparent !important;
+}
+.js-plotly-plot .modebar-btn path {
+  fill: rgba(170, 180, 195, 0.6) !important;
+}
+.js-plotly-plot .modebar-btn:hover path {
+  fill: rgba(74, 222, 128, 0.95) !important;
+}
+
+/* Light theme overrides via .dark / no-class on <html> */
+html:not(.dark) body {
+  background-color: #f5f7fa;
+  color: #181d27;
+}
+html:not(.dark) .card {
+  @apply bg-white border-ink-200 shadow-md shadow-ink-200/40;
+}
+html:not(.dark) .btn {
+  @apply bg-white border-ink-200 hover:bg-ink-50 text-ink-700;
+}
+html:not(.dark) .pill {
+  @apply bg-ink-100 text-ink-700 border-ink-200;
+}
